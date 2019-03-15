@@ -1,21 +1,21 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 
+import PeopleListItem from './PeopleListItem'
+
 const PeopleList = props => {
     const { peoples } = props
-    const textElements = peoples.map(people => {
-        const { first } = people.name
-        return (
-            <View key={first} style={styles.line}>
-                <Text style={styles.lineText}>{first}</Text>
-            </View>
-        )
-    })
+
+    const items = peoples.map(people =>
+        <PeopleListItem
+            key={people.name.first}
+            people={people} />
+    )
 
 
     return (
         <View style={styles.container}>
-            {textElements}
+            {items}
         </View>
     )
 }
@@ -25,17 +25,5 @@ export default PeopleList
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#e2f9ff'
-    },
-    line: {
-        height: 60,
-        borderBottomWidth: 1,
-        borderBottomColor: '#bbb',
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
-    lineText: {
-        fontSize: 20,
-        paddingLeft: 15,
-
     }
 })
