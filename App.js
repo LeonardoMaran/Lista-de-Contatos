@@ -1,37 +1,13 @@
-import React from 'react';
-import { View } from 'react-native';
+import { createAppContainer, createStackNavigator } from 'react-navigation'
 
-import axios from 'axios'
+import PeoplePage from './src/pages/PeoplePage'
 
-import Header from './src/components/Header'
-import PeopleList from './src/components/PeopleList'
-
-export default class App extends React.Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            peoples: []
-        }
+const StackNavigator = createStackNavigator({
+    'Main': {
+        screen: PeoplePage
     }
+})
 
-    componentDidMount() {
-        axios.get('https://randomuser.me/api/?nat=br&results=5')
-            .then(response => {
-                const { results } = response.data
-                this.setState({
-                    peoples: results
-                })
-            })
-    }
+const AppContainer = createAppContainer(StackNavigator)
 
-    render() {
-        return (
-            <View>
-                <Header title='Pessoas!' />
-                <PeopleList peoples={this.state.peoples} />
-            </View>
-        );
-    }
-}
-
+export default AppContainer
